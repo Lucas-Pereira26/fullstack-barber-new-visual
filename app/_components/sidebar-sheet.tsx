@@ -10,10 +10,13 @@ import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog"
 import { signOut, useSession } from "next-auth/react"
 import { Avatar, AvatarImage } from "./ui/avatar"
 import SignInDialog from "./sign-in-dialog"
+import { ThemeSwitcher } from "./theme-switcher"
+import { useTheme } from "next-themes"
 
 const SidebarSheet = () => {
   const { data } = useSession()
   const handleLogoutClick = () => signOut()
+  const themeName =  useTheme();
 
   return (
     <SheetContent className="overflow-y-auto">
@@ -97,6 +100,12 @@ const SidebarSheet = () => {
           </Button>
         </div>
       )}
+      <div className="flex items-center gap-2">
+        
+             <ThemeSwitcher   />
+             Modo {themeName.theme === "light" ? "Claro" : "Escuro"}
+        
+        </div>
     </SheetContent>
   )
 }
